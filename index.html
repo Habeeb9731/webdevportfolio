@@ -938,9 +938,9 @@
                 </div>
               </form> -->
               <!-- Contact Form End -->
-              <form action="https://api.web3forms.com/submit" method="POST" class="form contact-form" >
+              <form action="https://api.web3forms.com/submit" method="POST" class="form contact-form" id="form">
                 <input type="hidden" name="access_key" value="c3906f31-abce-41a1-b156-e745f49cb494">
-                <input type="hidden" name="redirect" value="https://www.abdulhabeeb.website/thankyou.html">
+                <input type="hidden" name="redirect" value="">
                 
                 <div class="container-fluid p-0">
                     <div class="row gx-0">
@@ -968,6 +968,9 @@
                     </div>
                 </div>
             </form>
+            <!-- <div id="result"></div> -->
+            
+
             
 
             </div>
@@ -1143,6 +1146,53 @@
     </script>
     <script src="js/app.js"></script>
     <script src="js/gallery-init.js"></script>
+    <script>
+      const form = document.getElementById('form');
+      const button = form.querySelector('button');
+      const caption = button.querySelector('.btn-caption');
+      const icon = button.querySelector('i');
+  
+      form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const formData = new FormData(form);
+          const object = Object.fromEntries(formData);
+          const json = JSON.stringify(object);
+          caption.innerText = "Please wait...";
+          icon.className = ''; // Remove the current icon
+  
+          fetch('https://api.web3forms.com/submit', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Accept': 'application/json'
+                  },
+                  body: json
+              })
+              .then(async (response) => {
+                  let json = await response.json();
+                  if (response.status == 200) {
+                      caption.innerText = 'Message Sent Successfully';
+                      icon.className = 'ph-bold ph-thumbs-up'; // Update the icon class to thumbs up
+                  } else {
+                      console.log(response);
+                      caption.innerText = 'Failed to Send';
+                  }
+              })
+              .catch(error => {
+                  console.log(error);
+                  caption.innerText = "Something went wrong!";
+              })
+              .then(function() {
+                  form.reset();
+                  setTimeout(() => {
+                      caption.innerText = 'Send Message';
+                      icon.className = 'ph-bold ph-paper-plane-tilt'; // Reset the icon class
+                  }, 3000);
+              });
+      });
+  </script>
+
+    
     <!-- Load Scripts End -->
     
   </body>
