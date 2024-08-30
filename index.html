@@ -45,6 +45,39 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Custom Browser Color End -->
+    <style>
+       html,body {
+        margin: 0px;
+        width: 100vw;
+        padding: 0;
+        overflow-x: hidden; 
+    }
+      /* Flexbox for desktop */
+      .robot-container {
+    display: grid; /* Use CSS Grid */
+    grid-template-columns: 1fr auto; /* Place content in a grid with two columns */
+    width: 100%; /* Take full width of the container */
+    height: 100vh; /* Full viewport height */
+}
+
+.robot-container spline-viewer {
+    grid-column: 2; /* Place in the second column (right side) */
+}
+
+    .robot-container spline-viewer::part(brand) {
+        display: none !important;
+    }
+    
+
+      /* Hide on mobile */
+      @media (max-width: 768px) {
+          .robot-container {
+              display: none;
+          }
+      }
+  </style>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.21/build/spline-viewer.js"></script>
+  
   </head>
 
   <body>
@@ -271,6 +304,14 @@
             </div>
           </div>
           <!-- Headline End -->
+          <!-- <div class="container">
+            <spline-viewer url="https://prod.spline.design/7yJH5ko31NUcGEzo/scene.splinecode"></spline-viewer>
+        </div> -->
+        
+        <div class="robot-container">
+          <spline-viewer url="https://prod.spline.design/7yJH5ko31NUcGEzo/scene.splinecode"></spline-viewer>
+      </div>
+          
 
           <!-- Scroll Button Start -->
           <div class="rotating-btn">
