@@ -55,13 +55,14 @@
       /* Flexbox for desktop */
       .robot-container {
     display: grid; /* Use CSS Grid */
-    grid-template-columns: 1fr auto; /* Place content in a grid with two columns */
+    grid-template-columns: 1fr auto 1fr; /* Place content in a grid with two columns */
     width: 100%; /* Take full width of the container */
     height: 100vh; /* Full viewport height */
+    justify-items: center;
 }
 
 .robot-container spline-viewer {
-    grid-column: 2; /* Place in the second column (right side) */
+    grid-column: 3; /* Place in the second column (right side) */
 }
 
     .robot-container spline-viewer::part(brand) {
